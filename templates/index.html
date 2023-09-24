@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Weather</title>
+    <style>
+       
+
+        header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .search-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-section input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 16px;
+        }
+
+        .search-section button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .weather-info {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        h5 {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        
+
+        
+
+    </style>
+</head>
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Weather Detector</h1>
+    </header>
+
+    <div class="container">
+        <section class="search-section">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control" name="city" placeholder="Enter city name">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </section>
+
+        {% if data.country_code %}
+        <section class="weather-info">
+            <h1>{{ city }}</h1>
+            <h3>Country Code: {{ data.country_code }}</h3>
+            <h5>Coordinates: {{ data.coordinate }}</h5>
+            <h5>Temperature: {{ data.temp }}</h5>
+            <h5>Pressure: {{ data.pressure }}</h5>
+            <h5>Humidity: {{ data.humidity }}</h5>
+        </section>
+        {% elif data.error_message %}
+        <section class="weather-info">
+            <h1>{{ city }}</h1>
+            <p>{{ data.error_message }}</p>
+        </section>
+        {% endif %}
+    </div>
+</body>
+
+</html>
